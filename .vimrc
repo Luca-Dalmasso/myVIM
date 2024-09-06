@@ -68,6 +68,9 @@ set background=light
 " Set mouse
 set mouse=a
 
+" Set folding method with parenthesis
+set foldmethod=marker 
+
 
 " PLUGINS ---------------------------------------------------------------- {{{
 
@@ -115,8 +118,26 @@ nnoremap <space> :
 " noremap <c-right> <c-w><
 
 " NERDTree specific mappings.
-" Map the TAB key to toggle NERDTree open and close.
-nnoremap <tab> :NERDTreeToggle<cr>
+" Map the \ key to toggle NERDTree open and close.
+nnoremap \ :NERDTreeToggle<cr>
+
+" Map TAB to wa!
+nnoremap <tab> :wa!<cr>
+
+" Remapping to split navigations
+nnoremap <s-left> <c-w>h
+nnoremap <s-right> <c-w>l
+nnoremap <s-down> <c-w>j
+nnoremap <s-up> <c-w>k
+
+" Remap goto-file (gf) to tab new
+nnoremap gf :tab new <cfile><cr>
+
+" Enable windows-like copy/paste/delete shortcuts
+vmap <c-c> "+yi
+vmap <c-x> "+c
+vmap <c-v> c<esc>"+p
+imap <c-v> <esc>"+pa
 
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', '\.pyc$', '\.odt$', '\.png$', '\.gif$', '\.db$']
@@ -124,12 +145,6 @@ let NERDTreeIgnore=['\.git$', '\.jpg$', '\.mp4$', '\.ogg$', '\.iso$', '\.pdf$', 
 " }}}
 
 " VIMSCRIPT -------------------------------------------------------------- {{{
-
-" Enable the marker method of folding.
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-augroup END
 
 " If the current file type is HTML, set indentation to 2 spaces.
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
@@ -144,16 +159,6 @@ endif
 
 " If GUI version of Vim is running set these options.
 if has('gui_running')
-
-    " Set the background tone.
-    set background=dark
-
-    " Set the color scheme.
-    colorscheme molokai
-
-    " Set a custom font you have installed on your computer.
-    " Syntax: <font_name>\ <weight>\ <size>
-    set guifont=Monospace\ Regular\ 12
 
     " Display more of the file by default.
     " Hide the toolbar.
